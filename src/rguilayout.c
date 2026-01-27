@@ -3161,7 +3161,7 @@ int main(int argc, char *argv[])
             GuiSetStyle(STATUSBAR, TEXT_PADDING, 8);
             //----------------------------------------------------------------------------------------
 
-            // NOTE: If some overlap window is open and main window is locked, we draw a background rectangle
+            // NOTE: If some overlap window is open and main window is locked, draw a background rectangle
             //if (GuiIsLocked())    // WARNING: It takes one extra frame to process, so we just check required conditions
             if (windowHelpState.windowActive ||
                 windowAboutState.windowActive ||
@@ -3178,7 +3178,7 @@ int main(int argc, char *argv[])
                 DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)), 0.8f));
             }
 
-            // WARNING: Before drawing the windows, we unlock them
+            // WARNING: Before drawing the windows, unlock them
             GuiUnlock();
 
             // GUI: Help Window
