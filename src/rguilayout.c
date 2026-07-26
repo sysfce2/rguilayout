@@ -3198,15 +3198,16 @@ int main(int argc, char *argv[])
             if (showIssueReportWindow)
             {
                 Rectangle messageBox = { (float)GetScreenWidth()/2 - 300/2, (float)GetScreenHeight()/2 - 190/2 - 20, 300, 190 };
-                int result = GuiMessageBox(messageBox, "#220#Report Issue",
-                    "Do you want to report any issue or\nfeature request for this program?\n\ngithub.com/raysan5/rguilayout", "#186#Report on GitHub");
+                int btnActive = -1;
+                GuiMessageBox(messageBox, "#220#Report Issue",
+                    "Do you want to report any issue or\nfeature request for this program?\n\ngithub.com/raysan5/raylib-project-creator", "#186#Report on GitHub", &btnActive);
 
-                if (result == 1)    // Report issue pressed
+                if (btnActive == 1)    // Report issue pressed
                 {
                     OpenURL("https://github.com/raysan5/rguilayout/issues");
                     showIssueReportWindow = false;
                 }
-                else if (result == 0) showIssueReportWindow = false;
+                else if (btnActive == 0) showIssueReportWindow = false;
             }
             //----------------------------------------------------------------------------------------
 
@@ -3240,17 +3241,19 @@ int main(int argc, char *argv[])
             //----------------------------------------------------------------------------------------
             if (showResetWindow)
             {
-                int message = GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 320/2, GetScreenHeight()/2 - 120/2, 320, 120 }, "#8# Creating new layout", "Do you want to save the current layout?", "Yes;No");
+                int btnActive = -1;
+                GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 320/2, GetScreenHeight()/2 - 120/2, 320, 120 },
+                    "#8# Creating new layout", "Do you want to save the current layout?", "#112#Yes;#113#No", &btnActive);
 
-                if (message == 0) showResetWindow = false;
-                else if (message == 1)  // Yes
+                if (btnActive == 0) showResetWindow = false;
+                else if (btnActive == 1)  // Yes
                 {
                     strcpy(outFileName, "layout_name.rgl");
                     showSaveFileDialog = true;
                     showResetWindow = false;
                     resetLayout = true;
                 }
-                else if (message == 2)  // No
+                else if (btnActive == 2)  // No
                 {
                     showResetWindow = false;
                     resetLayout = true;
@@ -3262,11 +3265,13 @@ int main(int argc, char *argv[])
             //----------------------------------------------------------------------------------------
             if (showExitWindow)
             {
-                int result = GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 320/2, GetScreenHeight()/2 - 120/2, 320, 120 }, "#159#Closing rGuiLayout", "Do you want to close without saving?", "Yes;No");
+                int btnActive = -1;
+                GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 320/2, GetScreenHeight()/2 - 120/2, 320, 120 },
+                    "#159#Closing rGuiLayout", "Do you want to close without saving?", "#112#Yes;#113#No", &btnActive);
 
-                if (result == 0) showExitWindow = false;
-                else if (result == 1) closeWindow = true;
-                else if (result == 2)
+                if (btnActive == 0) showExitWindow = false;
+                else if (btnActive == 1) closeWindow = true;
+                else if (btnActive == 2)
                 {
                     strcpy(outFileName, "layout_name.rgl");
                     showSaveFileDialog = true;
@@ -3319,7 +3324,9 @@ int main(int argc, char *argv[])
             {
 #if defined(CUSTOM_MODAL_DIALOGS)
                 int result = GuiFileDialog(DIALOG_TEXTINPUT, "#6#Save raygui layout file...", outFileName, "Ok;Cancel", NULL);
-                //int result = GuiTextInputBox((Rectangle){ screenWidth/2 - 280/2, screenHeight/2 - 112/2 - 30, 280, 112 }, "#2#Save raygui style file...", NULL, "#2#Save", outFileName, 512, NULL);
+                //int btnActive = -1;
+                //GuiTextInputBox((Rectangle){ screenWidth/2 - 280/2, screenHeight/2 - 112/2 - 30, 280, 112 },
+                //  "#2#Save raygui style file...", NULL, outFileName, 512, "#2#Save", &btnActive, NULL);
 #else
                 int result = GuiFileDialog(DIALOG_SAVE_FILE, "Save raygui layout file...", outFileName, "*.rgl", "raygui Layout Files (*.rgl)");
 #endif
