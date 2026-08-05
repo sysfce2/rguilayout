@@ -601,7 +601,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!closeWindow)    // Detect window close button
+    while (!closeWindow)    // Program must finish
     {
         // Basic program flow logic
         //----------------------------------------------------------------------------------
@@ -834,7 +834,7 @@ int main(int argc, char *argv[])
         // Show closing window on ESC
         if (IsKeyPressed(KEY_ESCAPE))
         {
-            if (textEditMode)       // Cancel text edit mode
+            if (textEditMode) // Cancel text edit mode
             {
                 textEditMode = false;
                 showIconPanel = false;
@@ -844,7 +844,7 @@ int main(int argc, char *argv[])
                     strcpy(layout->controls[selectedControl].text, prevText);
                 }
             }
-            else if (nameEditMode)  // Cancel name edit mode
+            else if (nameEditMode) // Cancel name edit mode
             {
                 nameEditMode = false;
                 if (selectedControl != -1)
@@ -1794,7 +1794,7 @@ int main(int argc, char *argv[])
                             {
                                 for (int i = 0; i < layout->controlCount; i++)
                                 {
-                                    if (layout->controls[i].ap->id == MAX_ANCHOR_POINTS)    // Auxiliar anchor id
+                                    if (layout->controls[i].ap->id == MAX_ANCHOR_POINTS) // Auxiliar anchor id
                                     {
                                         if (layout->controls[i].ap->id > 0)
                                         {
@@ -1842,7 +1842,7 @@ int main(int argc, char *argv[])
                                 {
                                     for (int i = 0; i < layout->controlCount; i++)
                                     {
-                                        if (layout->controls[i].ap->id == MAX_ANCHOR_POINTS)  // Auxiliar anchor id
+                                        if (layout->controls[i].ap->id == MAX_ANCHOR_POINTS) // Auxiliar anchor id
                                         {
                                             layout->controls[i].rec.x += layout->controls[i].ap->x;
                                             layout->controls[i].rec.y += layout->controls[i].ap->y;
@@ -2385,7 +2385,7 @@ int main(int argc, char *argv[])
             {
                 if (layout->anchors[i].enabled)
                 {
-                    if (i == 0)    // Reference anchor
+                    if (i == 0) // Reference anchor
                     {
                         Color colAnchor = colAnchor0;
 
@@ -2394,7 +2394,7 @@ int main(int argc, char *argv[])
                         DrawRectangle(layout->anchors[0].x - ANCHOR_RADIUS - 5, layout->anchors[0].y, ANCHOR_RADIUS*2 + 10, 1, Fade(colAnchor, 0.8f));
                         DrawRectangle(layout->anchors[0].x, layout->anchors[0].y - ANCHOR_RADIUS - 5, 1, ANCHOR_RADIUS*2 + 10, Fade(colAnchor, 0.8f));
                     }
-                    else    // Regular anchors
+                    else // Regular anchors
                     {
                         // Logic to properly choose colors
                         Color colAnchor = colAnchorDefault;
@@ -3163,7 +3163,7 @@ int main(int argc, char *argv[])
             //----------------------------------------------------------------------------------------
 
             // NOTE: If some overlap window is open and main window is locked, draw a background rectangle
-            //if (GuiIsLocked())    // WARNING: It takes one extra frame to process, so just checking required conditions
+            //if (GuiIsLocked()) // WARNING: It takes one extra frame to process, so just checking required conditions
             if (windowHelpState.windowActive ||
                 windowAboutState.windowActive ||
                 windowCodegenState.windowActive ||
@@ -3246,14 +3246,14 @@ int main(int argc, char *argv[])
                     "#8# Creating new layout", "Do you want to save the current layout?", "#112#Yes;#113#No", &btnActive);
 
                 if (btnActive == 0) showResetWindow = false;
-                else if (btnActive == 1)  // Yes
+                else if (btnActive == 1) // Yes
                 {
                     strcpy(outFileName, "layout_name.rgl");
                     showSaveFileDialog = true;
                     showResetWindow = false;
                     resetLayout = true;
                 }
-                else if (btnActive == 2)  // No
+                else if (btnActive == 2) // No
                 {
                     showResetWindow = false;
                     resetLayout = true;
@@ -3712,9 +3712,9 @@ static GuiLayout *LoadLayout(const char *fileName)
 {
     GuiLayout *layout = (GuiLayout *)RL_CALLOC(1, sizeof(GuiLayout));
 
-    ResetLayout(layout);    // Init some default values
+    ResetLayout(layout); // Init some default values
 
-    if (fileName != NULL)   // Try loading text layout file
+    if (fileName != NULL) // Try loading text layout file
     {
         FILE *rglFile = fopen(fileName, "rt");
 
